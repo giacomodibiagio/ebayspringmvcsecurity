@@ -27,7 +27,7 @@ public class LoginController {
 			message = "You have been successfully logged out !!";
 			model.addAttribute("infoMessage", message);
 		}
-		return "login";
+		return "open/login";
 	}
 
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)

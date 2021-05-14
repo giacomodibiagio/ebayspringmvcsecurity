@@ -7,7 +7,7 @@
 	<title>Registra nuovo Utente</title>
 	
 	<!-- style per le pagine diverse dalla index -->
-    <link href="${pageContext.request.contextPath}/assets/css/global.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/static/assets/css/global.css" rel="stylesheet">
     
 </head>
 <body>
