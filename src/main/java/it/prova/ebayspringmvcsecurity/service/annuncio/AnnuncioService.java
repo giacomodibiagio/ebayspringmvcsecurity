@@ -18,5 +18,6 @@ public interface AnnuncioService {
 
     public void rimuovi(Annuncio annuncioInstance);
 
-    //  public List<Acquisto> findByExample(Acquisto example);
+    List<Annuncio> findByExample(Annuncio annuncioExample);
+
 }

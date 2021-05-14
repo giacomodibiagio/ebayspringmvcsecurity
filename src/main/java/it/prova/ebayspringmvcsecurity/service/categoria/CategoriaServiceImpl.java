@@ -3,9 +3,11 @@ package it.prova.ebayspringmvcsecurity.service.categoria;
 import it.prova.ebayspringmvcsecurity.model.Categoria;
 import it.prova.ebayspringmvcsecurity.repository.categoria.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class CategoriaServiceImpl implements CategoriaService{
 
     @Autowired

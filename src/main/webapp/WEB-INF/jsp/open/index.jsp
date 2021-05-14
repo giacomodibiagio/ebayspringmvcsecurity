@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="it">
 <head>
@@ -40,40 +41,33 @@
             </button>
         </div>
 
-        <form method="post" action="list">
+        <form method="post" action="${pageContext.request.contextPath}/open/list">
 
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label>Nome</label>
-                    <input type="text" name="nome" id="nome" class="form-control" placeholder="Inserire il nome">
+                    <label>Cosa cerchi?</label>
+                    <input type="text" name="testoAnnuncio" id="testoAnnuncio" class="form-control" placeholder="Vespa,IPhone,Bilocale">
                 </div>
 
                 <div class="form-group col-md-6">
-                    <label>Cognome</label>
-                    <input type="text" name="cognome" id="cognome" class="form-control"
-                           placeholder="Inserire il cognome">
+                    <label>Prezzo di partenza:</label>
+                    <input type="text" name="prezzo" id="prezzo" class="form-control"
+                           placeholder="500">
                 </div>
             </div>
 
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label>Codice Fiscale</label>
-                    <input type="text" class="form-control" name="codiceFiscale" id="codiceFiscale"
-                           placeholder="Inserire il codice Fiscale">
-                </div>
-                <div class="form-group col-md-6">
-                    <label>Indirizzo</label>
-                    <input type="text" class="form-control" name="indirizzo" id="indirizzo"
-                           placeholder="Inserire l'indirizzo">
-                </div>
-                <div class="form-group col-md-3">
-                    <label>Data di Nascita</label>
-                    <input class="form-control" id="dataDiNascita" type="date" placeholder="dd/MM/yy"
-                           title="formato : gg/mm/aaaa" name="dataDiNascita">
-                </div>
-
-
+            Seleziona le categorie:
+            <div class="form-check">
+                <c:forEach items="${categorie_list_attribute}" var="categoriaItem">
+                    <input name="categorie" class="form-check-input" type="checkbox" value="${categoriaItem.id}"
+                           id="defaultCheck${categoriaItem.id}">
+                    <label class="form-check-label" for="defaultCheck${categoriaItem.id}">
+                            ${categoriaItem.descrizione}
+                    </label>
+                    <br/>
+                </c:forEach>
             </div>
+
 
             <button type="submit" name="submit" value="submit" id="submit" class="btn btn-primary">Conferma</button>
             <input class="btn btn-outline-warning" type="reset" value="Ripulisci">
