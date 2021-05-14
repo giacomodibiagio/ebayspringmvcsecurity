@@ -23,27 +23,27 @@
 		    <div class='card-body'>
 		    	<dl class="row">
 				  <dt class="col-sm-3 text-right">Id:</dt>
-				  <dd class="col-sm-9">${show_utente_attr.id}</dd>
+				  <dd class="col-sm-9">${show_utente_attribute.id}</dd>
 		    	</dl>
 		    	
 		    	<dl class="row">
 				  <dt class="col-sm-3 text-right">username:</dt>
-				  <dd class="col-sm-9">${show_utente_attr.username}</dd>
+				  <dd class="col-sm-9">${show_utente_attribute.username}</dd>
 		    	</dl>
 		    	
 		    	<dl class="row">
 				  <dt class="col-sm-3 text-right">nome:</dt>
-				  <dd class="col-sm-9">${show_utente_attr.nome}</dd>
+				  <dd class="col-sm-9">${show_utente_attribute.nome}</dd>
 		    	</dl>
 		    	
 		    	<dl class="row">
 				  <dt class="col-sm-3 text-right">cognome:</dt>
-				  <dd class="col-sm-9">${show_utente_attr.cognome}</dd>
+				  <dd class="col-sm-9">${show_utente_attribute.cognome}</dd>
 		    	</dl>
 		    	
 		    	<dl class="row">
 					  <dt class="col-sm-3 text-right">Data creazione:</dt>
-					   <dd class="col-sm-9"><fmt:formatDate type = "date" value = "${show_utente_attr.dateCreated}" /></dd>
+					   <dd class="col-sm-9"><fmt:formatDate type = "date" value = "${show_utente_attribute.dateCreated}" /></dd>
 				   	</dl>
 		    	
 		    	<!-- info ruoli -->
@@ -54,7 +54,7 @@
 				</p>
 				
 				<div class="collapse" id="collapseExample">
-				<c:forEach items="${show_utente_attr.ruoli }" var="ruoloItem">
+				<c:forEach items="${show_utente_attribute.ruoli }" var="ruoloItem">
 				  <div class="card card-body">
 				  	<dl class="row">
 					  <dt class="col-sm-3 text-right">id:</dt>
@@ -75,12 +75,12 @@
 				<!-- end info ruoli -->
 		    	
 		    </div>
-		    
-		    <div class='card-footer'>
-		        <a href="${pageContext.request.contextPath}/admin/ExecuteListUtenteServlet" class='btn btn-outline-secondary' style='width:80px'>
-		            <i class='fa fa-chevron-left'></i> Back
-		        </a>
-		    </div>
+
+			<div class='card-footer'>
+				<a href="${pageContext.request.contextPath }/utente/" class='btn btn-outline-secondary' style='width:80px'>
+					<i class='fa fa-chevron-left'></i> Back
+				</a>
+			</div>
 		</div>	
 	
 	

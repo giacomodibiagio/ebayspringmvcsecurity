@@ -21,7 +21,7 @@ public class Utente {
 	@Column(name = "username", unique = true)
 	private String username;
 
-	@NotBlank(message = "{password.notblank}")
+	@NotBlank(message = "{password.notblank}", groups = EditUtenteParam.class)
 	@Column(name = "password")
 	private String password;
 
@@ -157,7 +157,7 @@ public class Utente {
 	}
 
 	public boolean isAttivo() {
-		return this.stato.equals(StatoUtente.ATTIVO);
+		return this.stato != null && this.stato.equals(StatoUtente.ATTIVO);
 	}
 
 }

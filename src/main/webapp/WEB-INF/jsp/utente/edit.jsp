@@ -1,102 +1,128 @@
-<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <!doctype html>
 <html lang="it">
 <head>
-	<jsp:include page="../header.jsp" />
-	<title>Inserisci nuovo</title>
-	
+	<jsp:include page="../header.jsp"/>
+	<title>Modifica elemento</title>
+
 	<!-- style per le pagine diverse dalla index -->
-    <link href="${pageContext.request.contextPath}/assets/css/global.css" rel="stylesheet">
-    
+	<link href="${pageContext.request.contextPath }/assets/css/global.css" rel="stylesheet">
+	<style>
+		.error_field {
+			color: red;
+		}
+	</style>
 </head>
 <body>
-	<jsp:include page="../navbar.jsp" />
-	
-	<main role="main" class="container">
-	
-			<%-- alert con lista errori --%>
-		<div class="alert alert-danger ${utenteDaModificare.hasErrors()?'':'d-none'}" role="alert">
-			<c:forEach var ="errorItem" items="${utenteDaModificare.errors }">
-	        	<ul>
-					<li> ${errorItem }</li>	
-				</ul>
-	      	</c:forEach>
+<jsp:include page="../navbar.jsp"/>
+
+<main role="main" class="container">
+
+	<%-- se l'attributo in request ha errori --%>
+	<spring:hasBindErrors name="edit_utente_attribute">
+		<%-- alert errori --%>
+		<div class="alert alert-danger " role="alert">
+			Attenzione!! Sono presenti errori di validazione
 		</div>
-	
-		<div class="alert alert-danger alert-dismissible fade show ${errorMessage==null?'d-none': ''}" role="alert">
-		  ${errorMessage}
-		  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-		    <span aria-hidden="true">&times;</span>
-		  </button>
+	</spring:hasBindErrors>
+
+	<div class="alert alert-danger alert-dismissible fade show ${errorMessage==null?'d-none': ''}" role="alert">
+		${errorMessage}
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+
+	<div class='card'>
+		<div class='card-header'>
+			<h5>Modifica elemento</h5>
 		</div>
-		
-		<div class='card'>
-		    <div class='card-header'>
-		        <h5>Modifica elemento</h5> 
-		    </div>
-		    <div class='card-body'>
-		    
-		    		<h6 class="card-title">I campi con <span class="text-danger">*</span> sono obbligatori</h6>
+		<div class='card-body'>
 
-					<form method="post" action="${pageContext.request.contextPath}/admin/ExecuteUpdateUtenteServlet" novalidate="novalidate" >
-					
-						<div class="form-row">
-							<div class="form-group col-md-6">
-								<label>username <span class="text-danger">*</span></label>
-								<input type="text" name="username" id="username" class="form-control" placeholder="Inserire il username" value="${utenteDaModificare.username }" autocomplete="nope" required>
-							</div>
-							
-							<div class="form-group col-md-6">
-								<label>nome <span class="text-danger">*</span></label>
-								<input type="text" name="nome" id="nome" class="form-control" placeholder="Inserire il nome" value="${utenteDaModificare.nome }" required>
-							</div>
-						</div>
-						
-						<div class="form-row">	
-							<div class="form-group col-md-6">
-								<label>cognome <span class="text-danger">*</span></label>
-								<input type="text" class="form-control" name="cognome" id="cognome" placeholder="Inserire il cognome" value="${utenteDaModificare.cognome }" required>
-							</div>
-							
-							<div class="form-group col-md-6">
-								<label>password <span class="text-danger">*</span></label>
-								<input type="password" class="form-control" name="password" id="password" placeholder="Inserire la password" value="${utenteDaModificare.password }" autocomplete="new-password" required>
-							</div>
-							
-							<div class="form-group col-md-6">
-								<label>conferma password <span class="text-danger">*</span></label>
-								<input type="password" class="form-control" name="confermaPassword" id="confermaPassword" placeholder="conferma Password"  required>
-							</div>
-							
-						</div>
-							<input type ="hidden" name="id" value ="${utenteDaModificare.id}">
-						<button type="submit" name="submit" value="submit" id="submit" class="btn btn-primary">Conferma</button>
+			<h6 class="card-title">I campi con <span class="text-danger">*</span> sono obbligatori</h6>
 
-						<br/>
-						Ruoli:
-						<div class="form-check">
-						<c:forEach items="${ruoli_list_attribute}" var="ruoloItem">
-						  <input name="ruolo.id" class="form-check-input" type="checkbox" value="${ruoloItem.id}" id="defaultCheck1" ${utenteDaModificare.ruoli.contains(ruoloItem)?"checked":"" }>
-						  <label class="form-check-label" for="defaultCheck1">
-						    ${ruoloItem.descrizione}
-						  </label>
-						  <br/>
-						  </c:forEach>
-						</div>
+			<form:form modelAttribute="edit_utente_attribute" method="post" action="update"
+					   novalidate="novalidate">
 
-					</form>
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label>Nome <span class="text-danger">*</span></label>
+						<spring:bind path="nome">
+							<input type="text" name="nome" id="nome"
+								   class="form-control ${status.error ? 'is-invalid' : ''}"
+								   placeholder="Inserire il nome" value="${edit_utente_attribute.nome }" required>
+						</spring:bind>
+						<spring:bind path="id">
+							<input type="hidden" name="id" id="id"
+								   class="form-control ${status.error ? 'is-invalid' : ''}"
+								   value="${edit_utente_attribute.id }" required>
+						</spring:bind>
+						<form:errors path="nome" cssClass="error_field"/>
+					</div>
 
-		    
-		    
-			<!-- end card-body -->			   
-		    </div>
-		</div>	
-	
-	
-	<!-- end container -->	
-	</main>
-	<jsp:include page="../footer.jsp" />
-	
+					<div class="form-group col-md-6">
+						<label>Cognome <span class="text-danger">*</span></label>
+						<spring:bind path="cognome">
+							<input type="text" name="cognome" id="cognome"
+								   class="form-control ${status.error ? 'is-invalid' : ''}"
+								   placeholder="Inserire il cognome" value="${edit_utente_attribute.cognome }"
+								   required>
+						</spring:bind>
+						<form:errors path="cognome" cssClass="error_field"/>
+					</div>
+				</div>
+
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label>Username <span class="text-danger">*</span></label>
+						<spring:bind path="username">
+							<input type="text" class="form-control ${status.error ? 'is-invalid' : ''}" name="username"
+								   id="username" placeholder="Inserire la username"
+								   value="${edit_utente_attribute.username }" required>
+						</spring:bind>
+						<form:errors path="username" cssClass="error_field"/>
+					</div>
+
+					<fmt:formatDate pattern='yyyy-MM-dd' var="parsedDate" type='date'
+									value='${edit_utente_attribute.dateCreated}'/>
+					<div class="form-group col-md-3">
+						<label>Data di creazione <span class="text-danger">*</span></label>
+						<spring:bind path="dateCreated">
+							<input class="form-control ${status.error ? 'is-invalid' : ''}" id="dateCreated"
+								   type="date" placeholder="dd/MM/yy"
+								   title="formato : gg/mm/aaaa" name="dateCreated" required
+								   value="${parsedDate}">
+						</spring:bind>
+						<form:errors path="dateCreated" cssClass="error_field"/>
+					</div>
+
+					<div class="form-group col-md-3">
+						<label>Credito residuo <span class="text-danger">*</span></label>
+						<spring:bind path="creditoResiduo">
+							<input type="text" class="form-control ${status.error ? 'is-invalid' : ''}" name="creditoResiduo"
+								   id="creditoResiduo" placeholder="Inserire il credito residuo"
+								   value="${edit_utente_attribute.creditoResiduo }" required>
+						</spring:bind>
+						<form:errors path="creditoResiduo" cssClass="error_field"/>
+					</div>
+
+				</div>
+
+				<button type="submit" name="submit" value="submit" id="submit" class="btn btn-primary">Conferma</button>
+
+			</form:form>
+
+			<!-- end card-body -->
+		</div>
+	</div>
+
+	<!-- end container -->
+</main>
+<jsp:include page="../footer.jsp"/>
+
 </body>
 </html>

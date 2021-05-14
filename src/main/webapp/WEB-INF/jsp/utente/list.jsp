@@ -79,8 +79,8 @@
 										<td>${utenteItem.stato}</td>
 										
 										<td>
-											<a class="btn  btn-sm btn-outline-secondary" href="${pageContext.request.contextPath}/admin/ExecuteVisualizzaUtenteServlet?idUtente=${utenteItem.id }">Visualizza</a>
-											<a class="btn  btn-sm btn-outline-primary ml-2 mr-2" href="${pageContext.request.contextPath}/admin/PrepareUpdateUtenteServlet?idUtente=${utenteItem.id }">Edit</a>
+											<a class="btn  btn-sm btn-outline-secondary" href="${pageContext.request.contextPath}/utente/show/${utenteItem.id }">Visualizza</a>
+											<a class="btn  btn-sm btn-outline-primary ml-2 mr-2" href="${pageContext.request.contextPath}/utente/edit/${utenteItem.id }">Edit</a>
 											
 											<a id="changeStatoLink_#_${utenteItem.id }" class="btn btn-outline-${utenteItem.isAttivo()?'danger':'success'} btn-sm link-for-modal" data-toggle="modal" data-target="#confirmDeleteModal"  >${utenteItem.isAttivo()?'Disabilita':'Abilita'}</a>
 									</tr>
@@ -113,7 +113,7 @@
 				            <div class="modal-body">
 				                Continuare con il cambio stato dell'elemento selezionato?
 				            </div>
-				            <form method="post" action="${pageContext.request.contextPath}/admin/ExecuteCambiaStatoUtenteServlet" >
+				            <form method="post" action="${pageContext.request.contextPath}/utente/cambiaStato" >
 					            <div class="modal-footer">
 					            	<input type="hidden" name="idUtenteForChangingStato" id="idUtenteForChangingStato" >
 					                <button type="button" class="btn btn-secondary" data-dismiss="modal">Chiudi</button>

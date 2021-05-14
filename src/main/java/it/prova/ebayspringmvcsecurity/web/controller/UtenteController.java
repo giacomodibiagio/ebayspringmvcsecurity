@@ -78,4 +78,31 @@ public class UtenteController {
 		return "redirect:/utente";
 	}
 
+	@GetMapping("/show/{idUtente}")
+	public String showUtente(@PathVariable(required = true) Long idUtente, Model model) {
+		model.addAttribute("show_utente_attribute", utenteService.caricaSingoloUtente(idUtente));
+		return "utente/show";
+	}
+
+	@GetMapping("/edit/{idUtente}")
+	public String editUtente(@PathVariable(required = true) Long idUtente, Model model) {
+		model.addAttribute("edit_utente_attribute", utenteService.caricaSingoloUtente(idUtente));
+		return "utente/edit";
+	}
+
+	@PostMapping("/edit/update")
+	public String updateUtente(@Valid @ModelAttribute("edit_utente_attribute") Utente utente, BindingResult result,
+								RedirectAttributes redirectAttrs) {
+		Utente utenteItem = utenteService.caricaSingoloUtente(utente.getId());
+		utente.setPassword(utenteItem.getPassword());
+
+		if (result.hasErrors()) {
+			return "utente/edit";
+		}
+		utenteService.aggiorna(utente);
+
+		redirectAttrs.addFlashAttribute("successMessage", "Operazione eseguita correttamente");
+		return "redirect:/utente";
+	}
+
 }
