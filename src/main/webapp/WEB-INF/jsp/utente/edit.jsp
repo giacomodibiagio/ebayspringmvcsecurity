@@ -115,6 +115,22 @@
 
 				</div>
 
+			<div class="form-row">
+				Selezionare il ruolo:
+				<div class="form-check">
+					<c:forEach items="${ruoli_list_attribute}" var="ruoloItem">
+						<spring:bind path="ruoli">
+							<input name="ruoli" class="form-check-input" type="checkbox" value="${ruoloItem.id}"
+							   id="defaultCheck${ruoloItem.id}">
+							<label class="form-check-label" for="defaultCheck${ruoloItem.id}">
+								${ruoloItem.descrizione}
+						</label>
+						</spring:bind>
+						<br/>
+					</c:forEach>
+				</div>
+			</div>
+
 				<button type="submit" name="submit" value="submit" id="submit" class="btn btn-primary">Conferma</button>
 
 			</form:form>

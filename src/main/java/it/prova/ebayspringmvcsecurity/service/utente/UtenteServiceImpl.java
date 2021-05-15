@@ -6,6 +6,7 @@ import it.prova.ebayspringmvcsecurity.model.Utente;
 import it.prova.ebayspringmvcsecurity.repository.ruolo.RuoloRepository;
 import it.prova.ebayspringmvcsecurity.repository.utente.UtenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,6 +19,8 @@ public class UtenteServiceImpl implements UtenteService {
 	private UtenteRepository repository;
 	@Autowired
 	private RuoloRepository ruoloRepository;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	@Transactional(readOnly = true)
 	public List<Utente> listAllUtenti() {
@@ -36,6 +39,9 @@ public class UtenteServiceImpl implements UtenteService {
 
 	@Transactional
 	public void inserisciNuovo(Utente utenteInstance) {
+		utenteInstance.setStato(StatoUtente.CREATO);
+		utenteInstance.setCreditoResiduo(0D);
+		utenteInstance.setPassword(passwordEncoder.encode(utenteInstance.getPassword()));
 		repository.save(utenteInstance);
 	}
 
@@ -67,8 +73,7 @@ public class UtenteServiceImpl implements UtenteService {
 
 		if (utenteInstance.getStato().equals(StatoUtente.ATTIVO))
 			utenteInstance.setStato(StatoUtente.DISABILITATO);
-		else if (utenteInstance.getStato().equals(StatoUtente.DISABILITATO))
-			utenteInstance.setStato(StatoUtente.ATTIVO);
+		else utenteInstance.setStato(StatoUtente.ATTIVO);
 	}
 
 	@Override

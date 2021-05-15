@@ -17,7 +17,7 @@ public class Utente {
 	@Column(name = "id")
 	private Long id;
 
-	@NotBlank(message = "{username.notblank}")
+	@NotBlank(message = "{username.notblank}", groups = RegistrationParam.class)
 	@Column(name = "username", unique = true)
 	private String username;
 
@@ -25,11 +25,11 @@ public class Utente {
 	@Column(name = "password")
 	private String password;
 
-	@NotBlank(message = "{nome.notblank}")
+	@NotBlank(message = "{nome.notblank}", groups = RegistrationParam.class)
 	@Column(name = "nome")
 	private String nome;
 
-	@NotBlank(message = "{cognome.notblank}")
+	@NotBlank(message = "{cognome.notblank}", groups = RegistrationParam.class)
 	@Column(name = "cognome")
 	private String cognome;
 

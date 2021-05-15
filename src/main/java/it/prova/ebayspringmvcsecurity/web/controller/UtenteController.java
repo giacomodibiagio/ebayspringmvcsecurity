@@ -71,8 +71,6 @@ public class UtenteController {
 		if (result.hasErrors()) {
 			return "utente/insert";
 		}
-		utente.setStato(StatoUtente.CREATO);
-		utente.setCreditoResiduo(0D);
 		utenteService.inserisciNuovo(utente);
 		redirectAttrs.addFlashAttribute("successMessage", "Operazione eseguita correttamente");
 		return "redirect:/utente";
@@ -86,6 +84,7 @@ public class UtenteController {
 
 	@GetMapping("/edit/{idUtente}")
 	public String editUtente(@PathVariable(required = true) Long idUtente, Model model) {
+		model.addAttribute("ruoli_list_attribute", ruoloService.listAll());
 		model.addAttribute("edit_utente_attribute", utenteService.caricaSingoloUtente(idUtente));
 		return "utente/edit";
 	}
@@ -94,7 +93,6 @@ public class UtenteController {
 	public String updateUtente(@Valid @ModelAttribute("edit_utente_attribute") Utente utente, BindingResult result,
 								RedirectAttributes redirectAttrs) {
 		Utente utenteItem = utenteService.caricaSingoloUtente(utente.getId());
-		utente.setPassword(utenteItem.getPassword());
 
 		if (result.hasErrors()) {
 			return "utente/edit";
