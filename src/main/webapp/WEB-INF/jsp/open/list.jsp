@@ -74,8 +74,8 @@
                                 <td>
                                     <a class="btn  btn-outline btn-outline-secondary"
                                        href="${pageContext.request.contextPath }/open/show/${annuncioItem.id }">Dettaglio</a>
-                                    <a class="btn  btn-outline-success btn-outline-primary ml-2 mr-2"
-                                       href="${pageContext.request.contextPath}/admin/PrepareUpdateUtenteServlet?idUtente=${annuncioItem.id }">Compra</a>
+                                    <a class="btn  btn-success  ml-2 mr-2"
+                                       href="${pageContext.request.contextPath }/acquisto/dettaglio/${annuncioItem.id }">Compra</a>
                             </tr>
                         </c:if>
 

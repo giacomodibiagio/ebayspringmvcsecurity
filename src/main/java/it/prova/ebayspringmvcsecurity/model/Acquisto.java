@@ -10,78 +10,86 @@ import java.util.Date;
 @Table(name = "acquisto")
 public class Acquisto {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
 
-	@NotBlank(message = "{descrizione.notblank}")
-	@Column(name = "descrizione")
-	private String descrizione;
+    @NotBlank(message = "{descrizione.notblank}")
+    @Column(name = "descrizione")
+    private String descrizione;
 
-	@NotNull(message = "{prezzo.notnull}")
-	@Min(value = 0)
-	@Column(name = "prezzo")
-	private Double prezzo;
+    @NotNull(message = "{prezzo.notnull}")
+    @Min(value = 0)
+    @Column(name = "prezzo")
+    private Double prezzo;
 
-	@NotNull(message = "{dataacquisto.notnull}")
-	@Column(name = "date_acquisto")
-	private Date dateAcquisto;
+    @NotNull(message = "{dataacquisto.notnull}")
+    @Column(name = "date_acquisto")
+    private Date dateAcquisto;
 
-	@NotNull(message = "{utente.notnull}")
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "utente_id")
-	private Utente utente;
+    @NotNull(message = "{utente.notnull}")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "utente_id")
+    private Utente utente;
 
-	public Acquisto() {
-		super();
-	}
 
-	public Long getId() {
-		return id;
-	}
+    public Acquisto() {
+        super();
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public Acquisto(String descrizione, Double prezzo, Date dateAcquisto, Utente utente) {
+        this.descrizione = descrizione;
+        this.prezzo = prezzo;
+        this.dateAcquisto = dateAcquisto;
+        this.utente = utente;
+    }
 
-	public String getDescrizione() {
-		return descrizione;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setDescrizione(String descrizione) {
-		this.descrizione = descrizione;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public Double getPrezzo() {
-		return prezzo;
-	}
+    public String getDescrizione() {
+        return descrizione;
+    }
 
-	public void setPrezzo(Double prezzo) {
-		this.prezzo = prezzo;
-	}
+    public void setDescrizione(String descrizione) {
+        this.descrizione = descrizione;
+    }
 
-	public Date getDateAcquisto() {
-		return dateAcquisto;
-	}
+    public Double getPrezzo() {
+        return prezzo;
+    }
 
-	public void setDateAcquisto(Date dateAcquisto) {
-		this.dateAcquisto = dateAcquisto;
-	}
+    public void setPrezzo(Double prezzo) {
+        this.prezzo = prezzo;
+    }
 
-	public Utente getUtente() {
-		return utente;
-	}
+    public Date getDateAcquisto() {
+        return dateAcquisto;
+    }
 
-	public void setUtente(Utente utente) {
-		this.utente = utente;
-	}
-	
+    public void setDateAcquisto(Date dateAcquisto) {
+        this.dateAcquisto = dateAcquisto;
+    }
 
-	@Override
-	public String toString() {
-		return "Acquisto [id=" + id + ", descrizione=" + descrizione + ", prezzo=" + prezzo + ", dateAcquisto="
-				+ dateAcquisto + ", utente=" + utente + "]";
-	}
+    public Utente getUtente() {
+        return utente;
+    }
+
+    public void setUtente(Utente utente) {
+        this.utente = utente;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Acquisto [id=" + id + ", descrizione=" + descrizione + ", prezzo=" + prezzo + ", dateAcquisto="
+                + dateAcquisto + ", utente=" + utente + "]";
+    }
 
 }

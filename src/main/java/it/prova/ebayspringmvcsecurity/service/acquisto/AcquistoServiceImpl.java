@@ -1,11 +1,14 @@
 package it.prova.ebayspringmvcsecurity.service.acquisto;
 
 import it.prova.ebayspringmvcsecurity.model.Acquisto;
+import it.prova.ebayspringmvcsecurity.model.Utente;
 import it.prova.ebayspringmvcsecurity.repository.acquisto.AcquistoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class AcquistoServiceImpl implements AcquistoService {
 
     @Autowired
@@ -39,6 +42,11 @@ public class AcquistoServiceImpl implements AcquistoService {
     @Override
     public void rimuovi(Acquisto acquistoInstance) {
         repository.delete(acquistoInstance);
+    }
+
+    @Override
+    public List<Acquisto> findByUtente(Utente utente) {
+        return repository.findByUtente(utente);
     }
 
  /*   @Override
