@@ -60,6 +60,8 @@
 			                        <th>Nome</th>
 			                        <th>Cognome</th>
 			                        <th>Data di Creazione</th>
+									<th>Stato utente</th>
+
 			                     <!--    <th>Ruolo</th> -->
 			                        <th>Azioni</th>
 			                    </tr>

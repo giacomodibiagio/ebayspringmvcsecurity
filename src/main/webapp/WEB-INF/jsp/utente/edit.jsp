@@ -108,6 +108,9 @@
 								   value="${edit_utente_attribute.creditoResiduo }" required>
 						</spring:bind>
 						<form:errors path="creditoResiduo" cssClass="error_field"/>
+
+						<input type="hidden" id="stato" name="stato" value="${edit_utente_attribute.stato }">
+
 					</div>
 
 				</div>

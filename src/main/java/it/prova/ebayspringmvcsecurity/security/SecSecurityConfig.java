@@ -13,45 +13,46 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 @EnableWebSecurity
 public class SecSecurityConfig extends WebSecurityConfigurerAdapter {
-	
-	@Autowired
-	private CustomUserDetailsService customUserDetailsService;
-	
-	@Bean
+
+    @Autowired
+    private CustomUserDetailsService customUserDetailsService;
+
+    @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
- 
+
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth
-         .userDetailsService(customUserDetailsService)
-         .passwordEncoder(passwordEncoder());
+                .userDetailsService(customUserDetailsService)
+                .passwordEncoder(passwordEncoder());
     }
-    
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-    	 http.authorizeRequests()
-         .antMatchers("/assets/**").permitAll()
-		 .antMatchers("/open/**").permitAll()
+        http.authorizeRequests()
+                .antMatchers("/assets/**").permitAll()
+                .antMatchers("/open/**").permitAll()
+                .antMatchers("/", "/home").permitAll()
 //         .antMatchers("/login").permitAll()
-         .antMatchers("/utente/**").hasRole("ADMIN")
-         .antMatchers("/**").hasAnyRole("ADMIN", "CLASSIC_USER")
-         //.antMatchers("/anonymous*").anonymous()
-         .anyRequest().authenticated()
-         .and()
-         	.formLogin()
-         	.loginPage("/login")
-         	.defaultSuccessUrl("/home")
-         	.failureUrl("/login?error=true")
-         	.permitAll()
-         .and()
-         	.logout()
-         	.logoutSuccessUrl("/login?logout=true")
-            .invalidateHttpSession(true)
-            .permitAll()
-         .and()
-            .csrf()
-            .disable();
+                .antMatchers("/utente/**").hasRole("ADMIN")
+                .antMatchers("/**").hasAnyRole("ADMIN", "CLASSIC_USER")
+                //.antMatchers("/anonymous*").anonymous()
+                .anyRequest().authenticated()
+                .and()
+                .formLogin()
+                .loginPage("/login")
+                .defaultSuccessUrl("/home")
+                .failureUrl("/login?error=true")
+                .permitAll()
+                .and()
+                .logout()
+                .logoutSuccessUrl("/login?logout=true")
+                .invalidateHttpSession(true)
+                .permitAll()
+                .and()
+                .csrf()
+                .disable();
     }
 }
