@@ -48,9 +48,7 @@
             <h5>Lista dei risultati</h5>
         </div>
         <div class='card-body'>
-            <a class="btn btn-primary " href="${pageContext.request.contextPath}/admin/PrepareInsertUtenteServlet">Add
-                New</a>
-            <a href="${pageContext.request.contextPath}/admin/PrepareSearchUtenteServlet"
+            <a href="${pageContext.request.contextPath}"
                class='btn btn-outline-secondary'>
                 <i class='fa fa-chevron-left'></i> Torna alla Ricerca
             </a>
@@ -66,25 +64,23 @@
                     </thead>
                     <tbody>
                     <c:forEach items="${annunci_list_attribute }" var="annuncioItem">
-                    <c:if test="${annuncioItem.statoAnnuncio}">
-                    <td>${annuncioItem.testoAnnuncio }</td>
-                    <td>${annuncioItem.prezzo }</td>
-                    <td><fmt:formatDate type="date" value="${annuncioItem.dataPubblicazione}"/></td>
+                        <c:if test="${annuncioItem.statoAnnuncio}">
+                            <tr>
+                                <td>${annuncioItem.testoAnnuncio }</td>
+                                <td>${annuncioItem.prezzo }</td>
+                                <td><fmt:formatDate type="date" value="${annuncioItem.dataPubblicazione}"/></td>
 
 
-                    <td>
-                        <a class="btn  btn-sm btn-outline-secondary"
-                           href="${pageContext.request.contextPath}/admin/ExecuteVisualizzaUtenteServlet?idUtente=${annuncioItem.id }">Visualizza</a>
-                        <a class="btn  btn-sm btn-outline-primary ml-2 mr-2"
-                           href="${pageContext.request.contextPath}/admin/PrepareUpdateUtenteServlet?idUtente=${annuncioItem.id }">Edit</a>
+                                <td>
+                                    <a class="btn  btn-outline btn-outline-secondary"
+                                       href="${pageContext.request.contextPath }/open/show/${annuncioItem.id }">Dettaglio</a>
+                                    <a class="btn  btn-outline-success btn-outline-primary ml-2 mr-2"
+                                       href="${pageContext.request.contextPath}/admin/PrepareUpdateUtenteServlet?idUtente=${annuncioItem.id }">Compra</a>
+                            </tr>
                         </c:if>
-                        <tr>
 
 
-                        </tr>
-
-
-                        </c:forEach>
+                    </c:forEach>
                     </tbody>
                 </table>
             </div>

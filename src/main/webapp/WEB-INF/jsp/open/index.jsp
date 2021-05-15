@@ -68,12 +68,11 @@
                 </c:forEach>
             </div>
 
-
+            <br>
             <button type="submit" name="submit" value="submit" id="submit" class="btn btn-primary">Conferma</button>
             <input class="btn btn-outline-warning" type="reset" value="Ripulisci">
 
-            <a class="btn btn-outline-primary ml-2" href="${pageContext.request.contextPath }/contribuente/insert">Add
-                New</a>
+
 
         </form>
 

@@ -10,7 +10,6 @@ public interface AnnuncioService {
 
     public Annuncio caricaSingoloElemento(Long id);
 
-    //  public Acquisto caricaSingoloElementoEager(Long id);
 
     public void aggiorna(Annuncio annuncioInstance);
 
@@ -20,4 +19,5 @@ public interface AnnuncioService {
 
     List<Annuncio> findByExample(Annuncio annuncioExample);
 
+    Annuncio caricaSingoloAnnuncioEager(Long idAnnuncio);
 }
