@@ -87,19 +87,6 @@
 						<form:errors path="username" cssClass="error_field"/>
 					</div>
 
-					<fmt:formatDate pattern='yyyy-MM-dd' var="parsedDate" type='date'
-									value='${edit_utente_attribute.dateCreated}'/>
-					<div class="form-group col-md-3">
-						<label>Data di creazione <span class="text-danger">*</span></label>
-						<spring:bind path="dateCreated">
-							<input class="form-control ${status.error ? 'is-invalid' : ''}" id="dateCreated"
-								   type="date" placeholder="dd/MM/yy"
-								   title="formato : gg/mm/aaaa" name="dateCreated" required
-								   value="${parsedDate}">
-						</spring:bind>
-						<form:errors path="dateCreated" cssClass="error_field"/>
-					</div>
-
 					<div class="form-group col-md-3">
 						<label>Credito residuo <span class="text-danger">*</span></label>
 						<spring:bind path="creditoResiduo">
@@ -117,17 +104,17 @@
 
 			<div class="form-row">
 				Selezionare il ruolo:
+				<br>
 				<div class="form-check">
-					<c:forEach items="${ruoli_list_attribute}" var="ruoloItem">
-						<spring:bind path="ruoli">
-							<input name="ruoli" class="form-check-input" type="checkbox" value="${ruoloItem.id}"
-							   id="defaultCheck${ruoloItem.id}">
-							<label class="form-check-label" for="defaultCheck${ruoloItem.id}">
-								${ruoloItem.descrizione}
-						</label>
-						</spring:bind>
-						<br/>
-					</c:forEach>
+					<spring:bind path="ruoli">
+						<c:forEach items="${ruoli_list_attribute}" var="ruoloItem">
+							<input name="ruoli" class="form-check-input" type="checkbox" value="${ruoloItem.id}" id="defaultCheck1" ${edit_utente_attribute.ruoli.contains(ruoloItem)?"checked":"" }>
+							<label class="form-check-label" for="defaultCheck1">
+									${ruoloItem.descrizione}
+							</label>
+							<br/>
+						</c:forEach>
+					</spring:bind>
 				</div>
 			</div>
 

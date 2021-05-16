@@ -97,6 +97,11 @@ public class UtenteController {
 		if (result.hasErrors()) {
 			return "utente/edit";
 		}
+		Utente utenteInstance = utenteService.caricaSingoloUtente(utente.getId());
+		utente.setPassword(utenteInstance.getPassword());
+		utente.setStato(utenteInstance.getStato());
+		utente.setAcquisti(utenteInstance.getAcquisti());
+		utente.setDateCreated(utenteInstance.getDateCreated());
 		utenteService.aggiorna(utente);
 
 		redirectAttrs.addFlashAttribute("successMessage", "Operazione eseguita correttamente");
