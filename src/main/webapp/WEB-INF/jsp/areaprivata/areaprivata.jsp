@@ -116,7 +116,10 @@
                                 <td>${annuncioItem.prezzo }</td>
                                 <td><fmt:formatDate type="date" value="${annuncioItem.dataPubblicazione}"/></td>
 
-
+                                <td>
+                                <a class="btn   btn-outline-secondary" href="${pageContext.request.contextPath}/utente/show/${annuncioItem.id }">Modifica</a>
+                                <a class="btn   btn-outline-danger " href="${pageContext.request.contextPath}/areaprivata/eliminaAnnuncio/${annuncioItem.id }">Elimina</a>
+                                </td>
                             </tr>
 
                         </c:forEach>

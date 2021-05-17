@@ -68,4 +68,12 @@ public class AreaPrivataController {
         redirectAttrs.addFlashAttribute("successMessage", "Operazione eseguita correttamente");
         return "redirect:/areaprivata/areaprivata";
     }
+
+
+    @GetMapping("/eliminaAnnuncio/{idAnnuncio}")
+    public String eliminaAnnuncio(@PathVariable(required = true) Long idAnnuncio, Model model) {
+        model.addAttribute("dettaglio_articolo_attr", annuncioService.caricaSingoloAnnuncioEager(idAnnuncio));
+
+        return "/areaprivata/eliminaAnnuncio";
+    }
 }
