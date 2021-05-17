@@ -80,7 +80,7 @@
                 Ruoli:
                 <div class="form-check">
                     <c:forEach items="${ruoli_list_attribute}" var="ruoloItem">
-                        <input name="ruolo.id" class="form-check-input" type="checkbox" value="${ruoloItem.id}"
+                        <input name="ruoli" class="form-check-input" type="checkbox" value="${ruoloItem.id}"
                                id="defaultCheck${ruoloItem.id}">
                         <label class="form-check-label" for="defaultCheck${ruoloItem.id}">
                                 ${ruoloItem.descrizione}
