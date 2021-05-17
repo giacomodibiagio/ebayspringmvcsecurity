@@ -2,6 +2,7 @@ package it.prova.ebayspringmvcsecurity.service.annuncio;
 
 
 import it.prova.ebayspringmvcsecurity.model.Annuncio;
+import it.prova.ebayspringmvcsecurity.model.Utente;
 
 import java.util.List;
 
@@ -20,4 +21,6 @@ public interface AnnuncioService {
     List<Annuncio> findByExample(Annuncio annuncioExample);
 
     Annuncio caricaSingoloAnnuncioEager(Long idAnnuncio);
+
+    List<Annuncio> findAllByUtente(Utente utente);
 }

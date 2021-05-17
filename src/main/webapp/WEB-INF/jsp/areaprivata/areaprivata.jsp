@@ -72,6 +72,7 @@
                         <th>Descrizione</th>
                         <th>Prezzo</th>
                         <th>Data Acquisto</th>
+
                     </tr>
                     </thead>
                     <tbody>
@@ -82,11 +83,6 @@
                             <td><fmt:formatDate type="date" value="${acquistoItem.dateAcquisto}"/></td>
 
 
-                                <%--                            <td>--%>
-                                <%--                                <a class="btn  btn-outline btn-outline-secondary"--%>
-                                <%--                                   href="${pageContext.request.contextPath }/open/show/${annuncioItem.id }">Dettaglio</a>--%>
-                                <%--                                <a class="btn  btn-success  ml-2 mr-2"--%>
-                                <%--                                   href="${pageContext.request.contextPath }/acquisto/dettaglio/${annuncioItem.id }">Compra</a>--%>
                         </tr>
 
                     </c:forEach>
@@ -94,20 +90,40 @@
                 </table>
 
             </div>
-            <div class="card-footer text-muted">
-                2 days ago
-            </div>
+
         </div>
 
 
         <div class="card text-center ">
             <div class="card-header h4 text-center bg-info">
-                <p class="h4 text-center">Gestisci i tuoi annunci</p>
+                <p class="h4 text-center"> Gestisci i tuoi annunci</p>
             </div>
             <div class="card-body">
-                <h5 class="card-title">Special title treatment</h5>
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+                <div class='table-responsive'>
+                    <table class='table table-striped '>
+                        <thead>
+                        <tr>
+                            <th>Testo Annucio</th>
+                            <th>Prezzo</th>
+                            <th>Data Pubblicazione</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach items="${lista_annunci_utente }" var="annuncioItem">
+                            <tr>
+                                <td>${annuncioItem.testoAnnuncio }</td>
+                                <td>${annuncioItem.prezzo }</td>
+                                <td><fmt:formatDate type="date" value="${annuncioItem.dataPubblicazione}"/></td>
+
+
+                            </tr>
+
+                        </c:forEach>
+                        </tbody>
+                    </table>
+
+                </div>
             </div>
             <div class="card-footer text-muted">
                 2 days ago

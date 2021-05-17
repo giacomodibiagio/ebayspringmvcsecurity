@@ -1,6 +1,7 @@
 package it.prova.ebayspringmvcsecurity.service.annuncio;
 
 import it.prova.ebayspringmvcsecurity.model.Annuncio;
+import it.prova.ebayspringmvcsecurity.model.Utente;
 import it.prova.ebayspringmvcsecurity.repository.annuncio.AnnuncioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,5 +47,10 @@ public class AnnuncioServiceImpl implements AnnuncioService {
     @Override
     public Annuncio caricaSingoloAnnuncioEager(Long idAnnuncio) {
         return repository.findSingleAnnuncioEager(idAnnuncio);
+    }
+
+    @Override
+    public List<Annuncio> findAllByUtente(Utente utente) {
+        return repository.findAllByUtente(utente);
     }
 }
