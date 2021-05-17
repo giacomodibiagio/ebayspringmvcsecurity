@@ -73,6 +73,11 @@
             <input class="btn btn-outline-warning" type="reset" value="Ripulisci">
 
 
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <a class="btn btn-primary" href="${pageContext.request.contextPath}/areaprivata/areaprivata" role="button">Vai all'area privata</a>
+            </div>
+
+
 
         </form>
 
