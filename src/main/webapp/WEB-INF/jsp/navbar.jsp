@@ -12,16 +12,16 @@
       <li class="nav-item active">
         <a class="nav-link" href="${pageContext.request.contextPath}/home">Home <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Menu</a>
-        <div class="dropdown-menu" aria-labelledby="dropdown01">
-          <a class="dropdown-item" href="${pageContext.request.contextPath}/home">Home</a>
-          <a class="dropdown-item" href="${pageContext.request.contextPath}/regista/search">Ricerca Registi</a>
-          <a class="dropdown-item" href="${pageContext.request.contextPath}/regista/insert">Inserisci Regista</a>
-          <a class="dropdown-item" href="${pageContext.request.contextPath}/film/search">Ricerca Film</a>
-          <a class="dropdown-item" href="${pageContext.request.contextPath}/film/insert">Inserisci Film</a>
-        </div>
-      </li>
+<%--      <li class="nav-item dropdown">--%>
+<%--        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Menu</a>--%>
+<%--        <div class="dropdown-menu" aria-labelledby="dropdown01">--%>
+<%--          <a class="dropdown-item" href="${pageContext.request.contextPath}/home">Home</a>--%>
+<%--          <a class="dropdown-item" href="${pageContext.request.contextPath}/regista/search">Ricerca Registi</a>--%>
+<%--          <a class="dropdown-item" href="${pageContext.request.contextPath}/regista/insert">Inserisci Regista</a>--%>
+<%--          <a class="dropdown-item" href="${pageContext.request.contextPath}/film/search">Ricerca Film</a>--%>
+<%--          <a class="dropdown-item" href="${pageContext.request.contextPath}/film/insert">Inserisci Film</a>--%>
+<%--        </div>--%>
+<%--      </li>--%>
       <sec:authorize access="hasRole('ADMIN')">
 	      <li class="nav-item dropdown">
 	        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Gestione Utenze</a>
