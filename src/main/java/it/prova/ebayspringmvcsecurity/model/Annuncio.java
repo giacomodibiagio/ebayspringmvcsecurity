@@ -19,11 +19,11 @@ public class Annuncio {
 	@Column(columnDefinition = "tinyInt(1) default 1", name = "stato_annuncio")
 	private Boolean statoAnnuncio;
 
-	@NotBlank(message = "{testoannuncio.notblank}")
+	@NotBlank(message = "{testoannuncio.notblank}", groups = AnnuncioValidParam.class)
 	@Column(name = "testoAnnuncio")
 	private String testoAnnuncio;
 
-	@NotNull(message = "{prezzo.notnull}")
+	@NotNull(message = "{prezzo.notnull}", groups = AnnuncioValidParam.class)
 	@Min(value = 0)
 	@Column(name = "prezzo")
 	private Double prezzo;

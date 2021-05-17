@@ -1,10 +1,12 @@
 package it.prova.ebayspringmvcsecurity.web.controller;
 
 import it.prova.ebayspringmvcsecurity.model.Annuncio;
+import it.prova.ebayspringmvcsecurity.model.AnnuncioValidParam;
 import it.prova.ebayspringmvcsecurity.model.EditUtenteParam;
 import it.prova.ebayspringmvcsecurity.model.Utente;
 import it.prova.ebayspringmvcsecurity.service.acquisto.AcquistoService;
 import it.prova.ebayspringmvcsecurity.service.annuncio.AnnuncioService;
+import it.prova.ebayspringmvcsecurity.service.categoria.CategoriaService;
 import it.prova.ebayspringmvcsecurity.service.ruolo.RuoloService;
 import it.prova.ebayspringmvcsecurity.service.utente.UtenteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
 import java.security.Principal;
 
 @Controller
@@ -32,6 +35,9 @@ public class AreaPrivataController {
 
     @Autowired
     private RuoloService ruoloService;
+
+    @Autowired
+    private CategoriaService categoriaService;
 
 
     @GetMapping("/areaprivata")
@@ -81,12 +87,35 @@ public class AreaPrivataController {
     @PostMapping("/delete/{idAnnuncio}")
     public String prepareCambiaStatoCartellaEsattoriale(@PathVariable(required = true) Long idAnnuncio, Model model, RedirectAttributes redirectAttrs) {
 
+
         Annuncio annuncioDaDisattivare = annuncioService.caricaSingoloAnnuncioEager(idAnnuncio);
         annuncioDaDisattivare.setStatoAnnuncio(false);
         annuncioService.aggiorna(annuncioDaDisattivare);
 
 
         redirectAttrs.addFlashAttribute("successMessage", "Annuncio " + annuncioDaDisattivare.getTestoAnnuncio() + "disattivato");
+        return "redirect:/areaprivata/areaprivata";
+    }
+
+    @GetMapping("/modificaAnnuncio/{idAnnuncio}")
+    public String modificaAnnuncio(@PathVariable(required = true) Long idAnnuncio, Model model) {
+        model.addAttribute("categorie_list_attribute", categoriaService.listAllElements());
+        model.addAttribute("dettaglio_articolo_attr", annuncioService.caricaSingoloAnnuncioEager(idAnnuncio));
+        return "/areaprivata/modificaAnnuncio";
+    }
+
+    @PostMapping("/modificaAnnuncio/updateAnnuncio")
+    public String updateAnnuncio(@Validated(AnnuncioValidParam.class) @ModelAttribute("dettaglio_articolo_attr") Annuncio annuncio, BindingResult result,
+                                 RedirectAttributes redirectAttrs) {
+        Annuncio annuncioItem = annuncioService.caricaSingoloAnnuncioEager(annuncio.getId());
+
+        if (result.hasErrors()) {
+            return "/areaprivata/modificaAnnuncio";
+        }
+
+        annuncioService.aggiorna(annuncioItem);
+
+        redirectAttrs.addFlashAttribute("successMessage", "Operazione eseguita correttamente");
         return "redirect:/areaprivata/areaprivata";
     }
 }

@@ -121,7 +121,7 @@
                                 <c:if test="${annuncioItem.statoAnnuncio}">
                                     <td>
                                         <a class="btn   btn-outline-secondary"
-                                           href="${pageContext.request.contextPath}/utente/show/${annuncioItem.id }">Modifica</a>
+                                           href="${pageContext.request.contextPath}/areaprivata/modificaAnnuncio/${annuncioItem.id }">Modifica</a>
                                         <a class="btn   btn-outline-danger "
                                            href="${pageContext.request.contextPath}/areaprivata/eliminaAnnuncio/${annuncioItem.id }">Elimina</a>
                                     </td>
