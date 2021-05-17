@@ -56,12 +56,13 @@
 								   class="form-control ${status.error ? 'is-invalid' : ''}"
 								   placeholder="Inserire il nome" value="${edit_utente_attribute.nome }" required>
 						</spring:bind>
+						<form:errors path="nome" cssClass="error_field"/>
+
 						<spring:bind path="id">
 							<input type="hidden" name="id" id="id"
 								   class="form-control ${status.error ? 'is-invalid' : ''}"
 								   value="${edit_utente_attribute.id }" required>
 						</spring:bind>
-						<form:errors path="nome" cssClass="error_field"/>
 					</div>
 
 					<div class="form-group col-md-6">

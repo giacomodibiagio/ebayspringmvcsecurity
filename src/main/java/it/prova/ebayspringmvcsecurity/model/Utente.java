@@ -17,23 +17,23 @@ public class Utente {
 	@Column(name = "id")
 	private Long id;
 
-	@NotBlank(message = "{username.notblank}", groups = RegistrationParam.class)
+	@NotBlank(message = "{username.notblank}", groups = {RegistrationParam.class, EditUtenteParam.class})
 	@Column(name = "username", unique = true)
 	private String username;
 
-	@NotBlank(message = "{password.notblank}", groups = EditUtenteParam.class)
+	@NotBlank(message = "{password.notblank}")
 	@Column(name = "password")
 	private String password;
 
-	@NotBlank(message = "{nome.notblank}", groups = RegistrationParam.class)
+	@NotBlank(message = "{nome.notblank}", groups = {RegistrationParam.class, EditUtenteParam.class})
 	@Column(name = "nome")
 	private String nome;
 
-	@NotBlank(message = "{cognome.notblank}", groups = RegistrationParam.class)
+	@NotBlank(message = "{cognome.notblank}", groups = {RegistrationParam.class, EditUtenteParam.class})
 	@Column(name = "cognome")
 	private String cognome;
 
-	@Min(value = 0)
+	@Min(value = 0, groups = EditUtenteParam.class)
 	@Column(name = "credito_residuo")
 	private Double creditoResiduo;
 
