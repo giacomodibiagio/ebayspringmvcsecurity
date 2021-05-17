@@ -47,8 +47,8 @@
 			        <h5>Lista dei risultati</h5> 
 			    </div>
 			    <div class='card-body'>
-			    	<a class="btn btn-primary " href="${pageContext.request.contextPath}/admin/PrepareInsertUtenteServlet">Add New</a>
-			    	<a href="${pageContext.request.contextPath}/admin/PrepareSearchUtenteServlet" class='btn btn-outline-secondary' >
+			    	<a class="btn btn-primary " href="${pageContext.request.contextPath}/utente/insert">Add New</a>
+			    	<a href="${pageContext.request.contextPath}/utente/search" class='btn btn-outline-secondary' >
 			            <i class='fa fa-chevron-left'></i> Torna alla Ricerca
 			        </a>
 			    
