@@ -66,7 +66,7 @@ public class UtenteController {
 	}
 
 	@PostMapping("/save")
-	public String saveContribuente(@Valid @ModelAttribute("insert_utente_attribute") Utente utente, BindingResult result, RedirectAttributes redirectAttrs) {
+	public String saveUtente(@Validated(InsertUtenteParam.class) @ModelAttribute("insert_utente_attribute") Utente utente, BindingResult result, RedirectAttributes redirectAttrs) {
 		if (result.hasErrors()) {
 			return "utente/insert";
 		}

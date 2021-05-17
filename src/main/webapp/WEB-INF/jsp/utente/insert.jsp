@@ -72,7 +72,7 @@
                 <div class="form-group col-md-6">
                     <label>Password <span class="text-danger">*</span></label>
                     <spring:bind path="password">
-                        <input type="text" name="password" id="password" class="form-control ${status.error ? 'is-invalid' : ''}" placeholder="Inserire la username" value="${insert_utente_attribute.password }" required>
+                        <input type="password" name="password" id="password" class="form-control ${status.error ? 'is-invalid' : ''}" placeholder="Inserire la username" value="${insert_utente_attribute.password }" required>
                     </spring:bind>
                     <form:errors  path="password" cssClass="error_field" />
                 </div>
@@ -90,20 +90,21 @@
             <input class="btn btn-outline-warning" type="reset" value="Ripulisci">
 
 
-            <br/>
-            Ruoli:
-            <div class="form-check">
-                <c:forEach items="${ruoli_list_attribute}" var="ruoloItem">
-                    <input name="ruolo.id" class="form-check-input" type="checkbox" value="${ruoloItem.id}"
-                           id="defaultCheck1">
-                    <label class="form-check-label" for="defaultCheck1">${ruoloItem.descrizione}</label>
-                    <spring:bind path="ruoli">
-                        <input type="text" class="form-control ${status.error ? 'is-invalid' : ''}" name="ruoli" id="ruoli" value="${insert_utente_attribute.ruoli }" required>
-                    </spring:bind>
-                    <form:errors  path="ruoli" cssClass="error_field" />
-                    <br/>
-                </c:forEach>
-            </div>
+                <div class="form-row">
+                    Selezionare il ruolo:
+                    <br>
+                    <div class="form-check">
+                        <spring:bind path="ruoli">
+                            <c:forEach items="${ruoli_list_attribute}" var="ruoloItem">
+                                <input name="ruoli" class="form-check-input" type="checkbox" value="${ruoloItem.id}" id="defaultCheck1"}>
+                                <label class="form-check-label" for="defaultCheck1">
+                                        ${ruoloItem.descrizione}
+                                </label>
+                                <br/>
+                            </c:forEach>
+                        </spring:bind>
+                    </div>
+                </div>
 
             </form:form>
 

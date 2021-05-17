@@ -10,6 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -39,6 +40,7 @@ public class UtenteServiceImpl implements UtenteService {
 
 	@Transactional
 	public void inserisciNuovo(Utente utenteInstance) {
+		utenteInstance.setDateCreated(new Date());
 		utenteInstance.setStato(StatoUtente.CREATO);
 		utenteInstance.setCreditoResiduo(0D);
 		utenteInstance.setPassword(passwordEncoder.encode(utenteInstance.getPassword()));

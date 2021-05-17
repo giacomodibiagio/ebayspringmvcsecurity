@@ -17,19 +17,19 @@ public class Utente {
 	@Column(name = "id")
 	private Long id;
 
-	@NotBlank(message = "{username.notblank}", groups = {RegistrationParam.class, EditUtenteParam.class})
+	@NotBlank(message = "{username.notblank}", groups = {RegistrationParam.class, EditUtenteParam.class, InsertUtenteParam.class})
 	@Column(name = "username", unique = true)
 	private String username;
 
-	@NotBlank(message = "{password.notblank}")
+	@NotBlank(message = "{password.notblank}", groups = {InsertUtenteParam.class})
 	@Column(name = "password")
 	private String password;
 
-	@NotBlank(message = "{nome.notblank}", groups = {RegistrationParam.class, EditUtenteParam.class})
+	@NotBlank(message = "{nome.notblank}", groups = {RegistrationParam.class, EditUtenteParam.class, InsertUtenteParam.class})
 	@Column(name = "nome")
 	private String nome;
 
-	@NotBlank(message = "{cognome.notblank}", groups = {RegistrationParam.class, EditUtenteParam.class})
+	@NotBlank(message = "{cognome.notblank}", groups = {RegistrationParam.class, EditUtenteParam.class, InsertUtenteParam.class})
 	@Column(name = "cognome")
 	private String cognome;
 
