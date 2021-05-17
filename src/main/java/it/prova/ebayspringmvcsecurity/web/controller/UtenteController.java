@@ -66,8 +66,9 @@ public class UtenteController {
 	}
 
 	@PostMapping("/save")
-	public String saveUtente(@Validated(InsertUtenteParam.class) @ModelAttribute("insert_utente_attribute") Utente utente, BindingResult result, RedirectAttributes redirectAttrs) {
+	public String saveUtente(@Validated(InsertUtenteParam.class) @ModelAttribute("insert_utente_attribute") Utente utente, BindingResult result, Model model, RedirectAttributes redirectAttrs) {
 		if (result.hasErrors()) {
+			model.addAttribute("ruoli_list_attribute", ruoloService.listAll());
 			return "utente/insert";
 		}
 		utenteService.inserisciNuovo(utente);
@@ -89,11 +90,12 @@ public class UtenteController {
 	}
 
 	@PostMapping("/edit/update")
-	public String updateUtente(@Validated(EditUtenteParam.class) @ModelAttribute("edit_utente_attribute") Utente utente, BindingResult result,
+	public String updateUtente(@Validated(EditUtenteParam.class) @ModelAttribute("edit_utente_attribute") Utente utente, BindingResult result, Model model,
 							   RedirectAttributes redirectAttrs) {
 		Utente utenteItem = utenteService.caricaSingoloUtente(utente.getId());
 
 		if (result.hasErrors()) {
+			model.addAttribute("ruoli_list_attribute", ruoloService.listAll());
 			return "utente/edit";
 		}
 		Utente utenteInstance = utenteService.caricaSingoloUtente(utente.getId());

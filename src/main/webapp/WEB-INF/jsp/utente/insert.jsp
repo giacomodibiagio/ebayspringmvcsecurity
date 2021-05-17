@@ -96,8 +96,8 @@
                     <div class="form-check">
                         <spring:bind path="ruoli">
                             <c:forEach items="${ruoli_list_attribute}" var="ruoloItem">
-                                <input name="ruoli" class="form-check-input" type="checkbox" value="${ruoloItem.id}" id="defaultCheck1"}>
-                                <label class="form-check-label" for="defaultCheck1">
+                                <input name="ruoli" class="form-check-input ${status.error ? 'is-invalid' : ''}" type="checkbox" value="${ruoloItem.id}" id="defaultCheck${ruoloItem.id}"}>
+                                <label class="form-check-label" for="defaultCheck${ruoloItem.id}">
                                         ${ruoloItem.descrizione}
                                 </label>
                                 <br/>
