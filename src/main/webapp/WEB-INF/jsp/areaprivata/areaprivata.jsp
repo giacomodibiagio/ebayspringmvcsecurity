@@ -52,7 +52,7 @@
         </div>
 
         <div class='card-footer'>
-            <a href="${pageContext.request.contextPath }/utente/" class='btn btn-outline-light btn-warning'>
+            <a href="${pageContext.request.contextPath }/areaprivata/modificaDatiAccount" class='btn btn-outline-light btn-warning'>
                 <i class='fa fa-chevron-left'></i>Modifica i tuoi dati
             </a>
 
