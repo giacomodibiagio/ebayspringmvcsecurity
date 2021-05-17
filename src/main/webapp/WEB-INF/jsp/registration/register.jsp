@@ -72,10 +72,10 @@
                         <label>Password</label>
                         <form:errors path="password" cssClass="error_field" />
                         <spring:bind path="password">
-                            <input type="text" name="password" id="password"class="form-control ${status.error ? 'is-invalid' : ''}" placeholder="Inserire il password" value="${utente_registration_attribute.password }" autocomplete="new-password" >
+                            <input type="password" name="password" id="password"class="form-control ${status.error ? 'is-invalid' : ''}" placeholder="Inserire il password" value="${utente_registration_attribute.password }" autocomplete="new-password" >
 
                             <label>conferma password <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control ${status.error ? 'is-invalid' : ''}" name="confermaPassword" id="confermaPassword" placeholder="conferma Password"  required>
+                            <input type="password" class="form-control ${status.error ? 'is-invalid' : ''}" name="confermaPassword" id="confermaPassword" placeholder="conferma Password"  required>
                         </spring:bind>
                         <form:errors path="password" cssClass="error_field" />
 
