@@ -1,5 +1,6 @@
 package it.prova.ebayspringmvcsecurity.web.controller;
 
+import it.prova.ebayspringmvcsecurity.model.Annuncio;
 import it.prova.ebayspringmvcsecurity.model.EditUtenteParam;
 import it.prova.ebayspringmvcsecurity.model.Utente;
 import it.prova.ebayspringmvcsecurity.service.acquisto.AcquistoService;
@@ -75,5 +76,17 @@ public class AreaPrivataController {
         model.addAttribute("dettaglio_articolo_attr", annuncioService.caricaSingoloAnnuncioEager(idAnnuncio));
 
         return "/areaprivata/eliminaAnnuncio";
+    }
+
+    @PostMapping("/delete/{idAnnuncio}")
+    public String prepareCambiaStatoCartellaEsattoriale(@PathVariable(required = true) Long idAnnuncio, Model model, RedirectAttributes redirectAttrs) {
+
+        Annuncio annuncioDaDisattivare = annuncioService.caricaSingoloAnnuncioEager(idAnnuncio);
+        annuncioDaDisattivare.setStatoAnnuncio(false);
+        annuncioService.aggiorna(annuncioDaDisattivare);
+
+
+        redirectAttrs.addFlashAttribute("successMessage", "Annuncio " + annuncioDaDisattivare.getTestoAnnuncio() + "disattivato");
+        return "redirect:/areaprivata/areaprivata";
     }
 }

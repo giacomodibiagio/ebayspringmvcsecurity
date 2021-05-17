@@ -81,7 +81,7 @@
                     Sei sicuro di voler eliminare l'annuncio?
                 </div>
                 <form method="post"
-                      action="${pageContext.request.contextPath }/acquisto/listaAcquistiUtente/${dettaglio_articolo_attr.id }">
+                      action="${pageContext.request.contextPath }/areaprivata/delete/${dettaglio_articolo_attr.id }">
                     <div class="modal-footer">
                         <input type="hidden" name="idCartellaEsattorialeForChangingStato"
                                id="idCartellaEsattorialeForChangingStato">
