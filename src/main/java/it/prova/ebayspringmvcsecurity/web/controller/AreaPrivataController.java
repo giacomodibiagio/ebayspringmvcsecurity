@@ -1,9 +1,6 @@
 package it.prova.ebayspringmvcsecurity.web.controller;
 
-import it.prova.ebayspringmvcsecurity.model.Annuncio;
-import it.prova.ebayspringmvcsecurity.model.AnnuncioValidParam;
-import it.prova.ebayspringmvcsecurity.model.EditUtenteParam;
-import it.prova.ebayspringmvcsecurity.model.Utente;
+import it.prova.ebayspringmvcsecurity.model.*;
 import it.prova.ebayspringmvcsecurity.service.acquisto.AcquistoService;
 import it.prova.ebayspringmvcsecurity.service.annuncio.AnnuncioService;
 import it.prova.ebayspringmvcsecurity.service.categoria.CategoriaService;
@@ -19,6 +16,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.Date;
+import java.util.List;
 
 @Controller
 @RequestMapping(value = "/areaprivata")
@@ -105,16 +104,43 @@ public class AreaPrivataController {
     }
 
     @PostMapping("/modificaAnnuncio/updateAnnuncio")
-    public String updateAnnuncio(@Validated(AnnuncioValidParam.class) @ModelAttribute("dettaglio_articolo_attr") Annuncio annuncio, BindingResult result,
+    public String updateAnnuncio(@Validated(AnnuncioValidParam.class) @ModelAttribute("dettaglio_articolo_attr") Annuncio annuncio, BindingResult result, Model model,
                                  RedirectAttributes redirectAttrs) {
-        Annuncio annuncioItem = annuncioService.caricaSingoloAnnuncioEager(annuncio.getId());
 
         if (result.hasErrors()) {
+            model.addAttribute("categorie_list_attribute", categoriaService.listAllElements());
             return "/areaprivata/modificaAnnuncio";
         }
 
-        annuncioService.aggiorna(annuncioItem);
+        Annuncio annuncioInstance = annuncioService.caricaSingoloAnnuncioEager(annuncio.getId());
+        annuncio.setStatoAnnuncio(annuncioInstance.getStatoAnnuncio());
+        annuncio.setDataPubblicazione(annuncioInstance.getDataPubblicazione());
+        annuncio.setUtente(annuncioInstance.getUtente());
+        annuncioService.aggiorna(annuncio);
 
+        redirectAttrs.addFlashAttribute("successMessage", "Operazione eseguita correttamente");
+        return "redirect:/areaprivata/areaprivata";
+    }
+
+    @GetMapping("/inserisciAnnuncio")
+    public String createAnnuncio(Model model) {
+        List<Categoria> categorie = categoriaService.listAllElements();
+        model.addAttribute("insert_annuncio_attribute", new Annuncio());
+        model.addAttribute("categorie_list_attribute", categorie);
+        return "areaprivata/inserisciAnnuncio";
+    }
+
+    @PostMapping("/inserisciAnnuncio/save")
+    public String saveAnnuncio(@Validated(AnnuncioValidParam.class) @ModelAttribute("insert_annuncio_attribute") Annuncio annuncio, BindingResult result, Model model, Principal principal, RedirectAttributes redirectAttrs) {
+        if (result.hasErrors()) {
+            model.addAttribute("categorie_list_attribute", categoriaService.listAllElements());
+            return "areaprivata/inserisciAnnuncio";
+        }
+        Utente utenteInSessione = utenteService.findByUsername(principal.getName());
+        annuncio.setUtente(utenteInSessione);
+        annuncio.setDataPubblicazione(new Date());
+        annuncio.setStatoAnnuncio(true);
+        annuncioService.inserisciNuovo(annuncio);
         redirectAttrs.addFlashAttribute("successMessage", "Operazione eseguita correttamente");
         return "redirect:/areaprivata/areaprivata";
     }

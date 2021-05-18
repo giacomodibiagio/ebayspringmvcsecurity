@@ -85,7 +85,7 @@
                     <div class="form-check">
                         <spring:bind path="categorie">
                             <c:forEach items="${categorie_list_attribute}" var="categoriaItem">
-                                <input name="categorie" class="form-check-input" type="checkbox" value="${categoriaItem}"
+                                <input name="categorie" class="form-check-input" type="checkbox" value="${categoriaItem.id}"
                                        id="defaultCheck${categoriaItem.id}" ${dettaglio_articolo_attr.categorie.contains(categoriaItem)?"checked":"" }>
                                 <label class="form-check-label" for="defaultCheck${categoriaItem.id}">
                                         ${categoriaItem.descrizione}
